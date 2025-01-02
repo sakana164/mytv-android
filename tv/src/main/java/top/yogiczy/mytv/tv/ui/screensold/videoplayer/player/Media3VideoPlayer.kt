@@ -306,6 +306,11 @@ class Media3VideoPlayer(
             if (playbackState != Player.STATE_BUFFERING) {
                 triggerBuffering(false)
             }
+
+            if(playbackState == Player.STATE_ENDED) {
+                videoPlayer.seekToDefaultPosition()
+                videoPlayer.prepare()
+            }
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
