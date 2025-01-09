@@ -25,12 +25,8 @@ object Constants {
     val IPTV_SOURCE_LIST = IptvSourceList(
         listOf(
             IptvSource(
-                name = "默认直播源 fanmingming（IPV6）",
-                url = "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
-            ),
-            IptvSource(
-                name = "默认直播源 yuanzl77（IPV4/IPV6）",
-                url = "https://ghp.ci/https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u",
+                name = "无效占位订阅源",
+                url = "http://1.2.3.4/live.m3u",
             ),
         )
     )
@@ -48,10 +44,6 @@ object Constants {
             EpgSource(
                 name = "默认节目单 老张的EPG",
                 url = "http://epg.51zmt.top:8000/e.xml.gz",
-            ),
-            EpgSource(
-                name = "默认节目单 回看七天",
-                url = "https://e.erw.cc/all.xml.gz",
             ),
         )
     )
