@@ -8,19 +8,14 @@
 [![GitHub](https://img.shields.io/github/license/yaoxieyoulei/mytv-android)](https://github.com/yaoxieyoulei/mytv-android)
 
 </div>
-    <p>使用Android原生开发的电视直播软件</p>
-
-<img src="./tv/screenshots/Screenshot_dashboard.png" width="96%"/>
-<br/>
-<img src="./tv/screenshots/Screenshot_channels.png" width="48%"/>
-<img src="./tv/screenshots/Screenshot_search.png" width="48%"/>
+    <p>使用Android原生开发的视频播放软件</p>
 </div>
 
 ## 使用
 
 ### 操作方式
 
-> 遥控器操作方式与主流电视直播软件类似；
+> 遥控器操作方式与主流视频播放软件类似；
 
 - 频道切换：使用上下方向键，或者数字键切换频道；屏幕上下滑动；
 - 频道选择：OK键；单击屏幕；
@@ -45,7 +40,7 @@
 ## 说明
 
 - 仅支持Android5及以上
-- 网络环境必须支持IPV6（默认直播源）
+- 网络环境必须支持IPV6（默认订阅源）
 - 只在自家电视上测过，其他电视稳定性未知
 
 ## 更新日志

@@ -91,10 +91,10 @@ fun App(
                 context,
                 settingsViewModel.feiyangAllInOneFilePath,
                 onFail = {
-                    Snackbar.show("肥羊AllInOne 启动失败", type = SnackbarType.ERROR)
+                    Snackbar.show("二进制 启动失败", type = SnackbarType.ERROR)
                 },
                 onUnsupported = {
-                    Snackbar.show("肥羊AllInOne 不支持当前平台", type = SnackbarType.ERROR)
+                    Snackbar.show("二进制 不支持当前平台", type = SnackbarType.ERROR)
                 },
             )
         }
