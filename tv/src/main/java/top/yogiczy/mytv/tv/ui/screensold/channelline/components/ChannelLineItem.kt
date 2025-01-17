@@ -61,7 +61,7 @@ fun ChannelLineItem(
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (line.hybridType == ChannelLine.HybridType.WebView) {
+                if (line.url.startsWith("webview://")) {
                     Tag("混合")
                     Tag(ChannelUtil.getHybridWebViewUrlProvider(line.url))
                 } else {
@@ -143,8 +143,7 @@ private fun ChannelLineItemPreview() {
             ChannelLineItem(
                 lineProvider = {
                     ChannelLine(
-                        url = "https://tv.cctv.com/live/cctv1/",
-                        hybridType = ChannelLine.HybridType.WebView,
+                        url = "webview://https://tv.cctv.com/live/cctv1/",
                     )
                 },
                 lineIdxProvider = { 0 },

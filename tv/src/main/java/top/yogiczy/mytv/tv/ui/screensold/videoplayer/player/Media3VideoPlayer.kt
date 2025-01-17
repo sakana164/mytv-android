@@ -307,7 +307,7 @@ class Media3VideoPlayer(
                 triggerBuffering(false)
             }
 
-            if(playbackState == Player.STATE_ENDED) {
+            if (playbackState == Player.STATE_ENDED) {
                 videoPlayer.seekToDefaultPosition()
                 videoPlayer.prepare()
             }
@@ -373,7 +373,10 @@ class Media3VideoPlayer(
                     metadata.copy(index = index)
                 }
 
-            metadata = metadata.copy(subtitleTracks = subtitleFormats)
+            metadata = metadata.copy(
+                subtitleTracks = subtitleFormats,
+                subtitle = subtitleFormats.firstOrNull { it.isSelected == true },
+            )
 
             triggerMetadata(metadata)
         }

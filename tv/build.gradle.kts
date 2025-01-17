@@ -22,7 +22,7 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 2
-        versionName = "3.3.8"
+        versionName = "3.3.9"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -146,7 +146,9 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:util"))
     implementation(project(":allinone"))
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
+    // implementation(project(":tbsx5"))
+
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar", "*.jar"))))
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)

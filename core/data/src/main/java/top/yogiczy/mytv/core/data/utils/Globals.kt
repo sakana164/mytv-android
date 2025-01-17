@@ -11,6 +11,7 @@ object Globals {
     lateinit var cacheDir: File
 
     lateinit var fileDir: File
+    lateinit var nativeLibraryDir: File
 
     lateinit var resources: Resources
 

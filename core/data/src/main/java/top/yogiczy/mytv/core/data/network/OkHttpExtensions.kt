@@ -54,7 +54,13 @@ suspend fun <T> String.request(
     val url = this
 
     return withContext(Dispatchers.IO) {
-        val client = OkHttpClient()
+        val client = OkHttpClient.Builder()
+            .sslSocketFactory(
+                TrustAllSSLSocketFactory.sslSocketFactory,
+                TrustAllSSLSocketFactory.trustManager
+            )
+            .hostnameVerifier { _, _ -> true }
+            .followRedirects(true).build()
         val request = Request.Builder()
             .url(url)
             .let(builder)

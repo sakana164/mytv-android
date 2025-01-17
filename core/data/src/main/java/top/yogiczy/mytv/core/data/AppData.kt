@@ -5,11 +5,13 @@ import android.os.Build
 import android.provider.Settings
 import top.yogiczy.mytv.core.data.utils.Globals
 import top.yogiczy.mytv.core.data.utils.SP
+import java.io.File
 
 object AppData {
     fun init(context: Context) {
         Globals.cacheDir = context.cacheDir
         Globals.fileDir = context.filesDir
+        Globals.nativeLibraryDir = File(context.applicationInfo.nativeLibraryDir)
         Globals.resources = context.resources
         Globals.deviceName = runCatching {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S) {

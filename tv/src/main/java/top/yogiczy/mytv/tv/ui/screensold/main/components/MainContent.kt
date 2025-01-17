@@ -57,6 +57,7 @@ fun MainContent(
     settingsViewModel: SettingsViewModel = settingsVM,
     onChannelFavoriteToggle: (Channel) -> Unit = {},
     toSettingsScreen: (SettingsSubCategories?) -> Unit = {},
+    toDashboardScreen: () -> Unit = {},
     onBackPressed: () -> Unit = {},
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -144,7 +145,7 @@ fun MainContent(
             showMetadataProvider = { settingsViewModel.debugShowVideoPlayerMetadata },
         )
 
-        Visibility({ mainContentState.currentChannelLine.hybridType == ChannelLine.HybridType.WebView }) {
+        Visibility({ mainContentState.currentChannelLine.url.startsWith("webview://") }) {
             WebViewScreen(
                 urlProvider = { mainContentState.currentChannelLine.url },
                 onVideoResolutionChanged = { width, height ->
@@ -363,6 +364,7 @@ fun MainContent(
             },
             epgListProvider = epgListProvider,
             currentPlaybackEpgProgrammeProvider = { mainContentState.currentPlaybackEpgProgramme },
+            playerDisplayModeProvider = { videoPlayerState.displayMode },
             videoPlayerMetadataProvider = { videoPlayerState.metadata },
             onShowEpg = {
                 mainContentState.isQuickOpScreenVisible = false
@@ -404,6 +406,10 @@ fun MainContent(
                     EpgRepository(settingsViewModel.epgSourceCurrent).clearCache()
                     Snackbar.show("缓存已清除，请重启应用")
                 }
+            },
+            toDashboardScreen = {
+                mainContentState.isQuickOpScreenVisible = false
+                toDashboardScreen()
             },
             onClose = { mainContentState.isQuickOpScreenVisible = false },
         )

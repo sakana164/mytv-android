@@ -191,6 +191,7 @@ abstract class VideoPlayer(
     data class Metadata(
         val video: Video? = null,
         val audio: Audio? = null,
+        val subtitle: Subtitle? = null,
         val videoTracks: List<Video> = emptyList(),
         val audioTracks: List<Audio> = emptyList(),
         val subtitleTracks: List<Subtitle> = emptyList(),
@@ -224,10 +225,10 @@ abstract class VideoPlayer(
             val shortLabel: String
                 get() = listOfNotNull(
                     "${width.toString()}x${height.toString()}",
+                    mimeType?.substringAfter("/"),
                     frameRate?.takeIf { it > 0 }?.let { "${it.roundToInt()}fps" },
                     bitrate?.takeIf { nnBitrate -> nnBitrate > 0 }?.humanizeBitrate()
-                )
-                    .joinToString(", ")
+                ).joinToString(", ")
         }
 
         data class Audio(
@@ -259,10 +260,10 @@ abstract class VideoPlayer(
             val shortLabel: String
                 get() = listOfNotNull(
                     channelsLabel ?: channels?.humanizeAudioChannels(),
+                    mimeType?.substringAfter("/"),
                     bitrate?.takeIf { nnBitrate -> nnBitrate > 0 }?.humanizeBitrate(),
                     language?.humanizeLanguage(),
-                )
-                    .joinToString(", ")
+                ).joinToString(", ")
         }
 
         data class Subtitle(
@@ -288,8 +289,7 @@ abstract class VideoPlayer(
             val shortLabel: String
                 get() = listOfNotNull(
                     language?.humanizeLanguage(),
-                )
-                    .joinToString(", ")
+                ).joinToString(", ")
         }
     }
 }

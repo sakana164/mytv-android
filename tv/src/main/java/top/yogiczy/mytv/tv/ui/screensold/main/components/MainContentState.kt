@@ -300,7 +300,7 @@ class MainContentState(
 
         log.d("播放${_currentChannel.name}（${_currentChannelLineIdx + 1}/${_currentChannel.lineList.size}）: $line")
 
-        if (line.hybridType == ChannelLine.HybridType.WebView) {
+        if (line.url.startsWith("webview://")) {
             videoPlayerState.metadata = VideoPlayer.Metadata()
             videoPlayerState.stop()
         } else {

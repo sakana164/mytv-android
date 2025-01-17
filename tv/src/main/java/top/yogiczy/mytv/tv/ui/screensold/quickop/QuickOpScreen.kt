@@ -16,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +38,7 @@ import top.yogiczy.mytv.tv.ui.screensold.channel.components.ChannelNumber
 import top.yogiczy.mytv.tv.ui.screensold.components.rememberScreenAutoCloseState
 import top.yogiczy.mytv.tv.ui.screensold.datetime.components.DateTimeDetail
 import top.yogiczy.mytv.tv.ui.screensold.quickop.components.QuickOpBtnList
+import top.yogiczy.mytv.tv.ui.screensold.videoplayer.VideoPlayerDisplayMode
 import top.yogiczy.mytv.tv.ui.screensold.videoplayer.player.VideoPlayer
 import top.yogiczy.mytv.tv.ui.theme.MyTvTheme
 import top.yogiczy.mytv.tv.ui.tooling.PreviewWithLayoutGrids
@@ -50,6 +53,7 @@ fun QuickOpScreen(
     epgListProvider: () -> EpgList = { EpgList() },
     isInTimeShiftProvider: () -> Boolean = { false },
     currentPlaybackEpgProgrammeProvider: () -> EpgProgramme? = { null },
+    playerDisplayModeProvider: () -> VideoPlayerDisplayMode = { VideoPlayerDisplayMode.ORIGINAL },
     videoPlayerMetadataProvider: () -> VideoPlayer.Metadata = { VideoPlayer.Metadata() },
     onShowEpg: () -> Unit = {},
     onShowChannelLine: () -> Unit = {},
@@ -60,6 +64,7 @@ fun QuickOpScreen(
     onShowSubtitleTracks: () -> Unit = {},
     onClearCache: () -> Unit = {},
     toSettingsScreen: (SettingsSubCategories?) -> Unit = {},
+    toDashboardScreen: () -> Unit = {},
     onClose: () -> Unit = {},
 ) {
     val screenAutoCloseState = rememberScreenAutoCloseState(onTimeout = onClose)
@@ -84,6 +89,7 @@ fun QuickOpScreen(
             epgListProvider = epgListProvider,
             isInTimeShiftProvider = isInTimeShiftProvider,
             currentPlaybackEpgProgrammeProvider = currentPlaybackEpgProgrammeProvider,
+            playerDisplayModeProvider = playerDisplayModeProvider,
             videoPlayerMetadataProvider = videoPlayerMetadataProvider,
             onShowEpg = onShowEpg,
             onShowChannelLine = onShowChannelLine,
@@ -94,7 +100,9 @@ fun QuickOpScreen(
             onShowSubtitleTracks = onShowSubtitleTracks,
             onShowMoreSettings = { toSettingsScreen(null) },
             onClearCache = onClearCache,
+            toDashboardScreen = toDashboardScreen,
             onUserAction = { screenAutoCloseState.active() },
+            onDismissRequest = onClose,
         )
     }
 }
@@ -149,6 +157,7 @@ private fun QuickOpScreenBottom(
     epgListProvider: () -> EpgList = { EpgList() },
     isInTimeShiftProvider: () -> Boolean = { false },
     currentPlaybackEpgProgrammeProvider: () -> EpgProgramme? = { null },
+    playerDisplayModeProvider: () -> VideoPlayerDisplayMode = { VideoPlayerDisplayMode.ORIGINAL },
     videoPlayerMetadataProvider: () -> VideoPlayer.Metadata = { VideoPlayer.Metadata() },
     onShowEpg: () -> Unit = {},
     onShowChannelLine: () -> Unit = {},
@@ -159,7 +168,9 @@ private fun QuickOpScreenBottom(
     onShowSubtitleTracks: () -> Unit = {},
     onShowMoreSettings: () -> Unit = {},
     onClearCache: () -> Unit = {},
+    toDashboardScreen: () -> Unit = {},
     onUserAction: () -> Unit = {},
+    onDismissRequest: () -> Unit = {},
 ) {
     val childPadding = rememberChildPadding()
 
@@ -167,6 +178,17 @@ private fun QuickOpScreenBottom(
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color(0x00000000),
+                            Color(0xB4000000),
+                            Color(0xF3000000),
+                        ),
+                        start = Offset(0f, 0f),
+                        end = Offset(0f, Float.POSITIVE_INFINITY),
+                    )
+                )
                 .padding(bottom = childPadding.bottom),
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
@@ -183,6 +205,9 @@ private fun QuickOpScreenBottom(
             )
 
             QuickOpBtnList(
+                channelProvider = currentChannelProvider,
+                channelLineIdxProvider = currentChannelLineIdxProvider,
+                playerDisplayModeProvider = playerDisplayModeProvider,
                 playerMetadataProvider = videoPlayerMetadataProvider,
                 onShowEpg = onShowEpg,
                 onShowChannelLine = onShowChannelLine,
@@ -193,7 +218,9 @@ private fun QuickOpScreenBottom(
                 onShowAudioTracks = onShowAudioTracks,
                 onShowSubtitleTracks = onShowSubtitleTracks,
                 onClearCache = onClearCache,
+                toDashboardScreen = toDashboardScreen,
                 onUserAction = onUserAction,
+                onDismissRequest = onDismissRequest,
             )
         }
     }

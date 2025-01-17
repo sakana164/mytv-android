@@ -75,18 +75,26 @@ fun Modifier.handleKeyEvents(
                 } else if (it.nativeKeyEvent.repeatCount == 1) {
                     keyDownMap.remove(it.nativeKeyEvent.keyCode)
                     onKeyLongTap[it.nativeKeyEvent.keyCode]?.invoke()
+
+                    onKeyLongTap[it.nativeKeyEvent.keyCode] != null
                 }
+
+                false
             }
 
             KeyEvent.ACTION_UP -> {
                 if (keyDownMap[it.nativeKeyEvent.keyCode] == true) {
                     keyDownMap.remove(it.nativeKeyEvent.keyCode)
                     onKeyTap[it.nativeKeyEvent.keyCode]?.invoke()
-                }
-            }
-        }
 
-        false
+                    onKeyTap[it.nativeKeyEvent.keyCode] != null
+                }
+
+                false
+            }
+
+            else -> false
+        }
     }
 }
 

@@ -538,7 +538,7 @@ object Configs {
 
     /** 播放器 停止上一媒体项 */
     var videoPlayerStopPreviousMediaItem: Boolean
-        get() = SP.getBoolean(KEY.VIDEO_PLAYER_STOP_PREVIOUS_MEDIA_ITEM.name, false)
+        get() = SP.getBoolean(KEY.VIDEO_PLAYER_STOP_PREVIOUS_MEDIA_ITEM.name, true)
         set(value) = SP.putBoolean(KEY.VIDEO_PLAYER_STOP_PREVIOUS_MEDIA_ITEM.name, value)
 
     /** 播放器 跳过同一VSync渲染多帧 */

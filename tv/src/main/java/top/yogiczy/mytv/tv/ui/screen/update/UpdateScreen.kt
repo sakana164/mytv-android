@@ -59,7 +59,11 @@ fun UpdateScreen(
         else requestPermission()
     }
 
-    AppScreen(modifier = modifier) {
+    AppScreen(
+        modifier = modifier,
+        onBackPressed = onBackPressed,
+        canBack = true,
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()

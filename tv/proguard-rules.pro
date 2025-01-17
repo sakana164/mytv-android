@@ -28,3 +28,7 @@
 -dontwarn java.awt.**
 -dontwarn java.beans.**
 -dontwarn javax.swing.**
+
+-dontwarn dalvik.system.VMStack
+-keep class com.tencent.smtt.** { *; }
+-keep class com.tencent.tbs.** { *; }

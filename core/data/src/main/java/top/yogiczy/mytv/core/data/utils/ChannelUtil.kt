@@ -138,12 +138,42 @@ object ChannelUtil {
             ChannelAlias.standardChannelName("山东卫视") to listOf(
                 "https://yangshipin.cn/tv/home?pid=600002513",
             ),
+            ChannelAlias.standardChannelName("天津卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600152137",
+            ),
+            ChannelAlias.standardChannelName("吉林卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190405",
+            ),
+            ChannelAlias.standardChannelName("陕西卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190400",
+            ),
+            ChannelAlias.standardChannelName("甘肃卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190408",
+            ),
+            ChannelAlias.standardChannelName("宁夏卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190737",
+            ),
+            ChannelAlias.standardChannelName("内蒙古卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190401",
+            ),
+            ChannelAlias.standardChannelName("云南卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190402",
+            ),
+            ChannelAlias.standardChannelName("山西卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190407",
+            ),
+            ChannelAlias.standardChannelName("青海卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190406",
+            ),
+            ChannelAlias.standardChannelName("西藏卫视") to listOf(
+                "https://yangshipin.cn/tv/home?pid=600190403",
+            ),
         )
     }
 
     fun getHybridWebViewLines(channelName: String): ChannelLineList {
         return ChannelLineList(hybridWebViewUrl[ChannelAlias.standardChannelName(channelName)]
-            ?.map { ChannelLine(url = it, hybridType = ChannelLine.HybridType.WebView) }
+            ?.map { ChannelLine(url = "webview://$it") }
             ?: emptyList())
     }
 

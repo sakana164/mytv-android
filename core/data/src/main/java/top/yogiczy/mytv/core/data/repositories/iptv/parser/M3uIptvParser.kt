@@ -44,19 +44,19 @@ class M3uIptvParser : IptvParser {
                             httpUserAgent = httpUserAgent,
                         )
                     }
+                } else if (line.startsWith("#KODIPROP:inputstream.adaptive.manifest_type")) {
+                    addedChannels =
+                        addedChannels.map { it.copy(manifestType = line.split("=").last()) }
+                } else if (line.startsWith("#KODIPROP:inputstream.adaptive.license_type")) {
+                    addedChannels =
+                        addedChannels.map { it.copy(licenseType = line.split("=").last()) }
+                } else if (line.startsWith("#KODIPROP:inputstream.adaptive.license_key")) {
+                    addedChannels =
+                        addedChannels.map { it.copy(licenseKey = line.split("=").last()) }
+                } else if (line.startsWith("#") || line.startsWith("//")) {
+                    return@forEach
                 } else {
-                    if (line.startsWith("#KODIPROP:inputstream.adaptive.manifest_type")) {
-                        addedChannels =
-                            addedChannels.map { it.copy(manifestType = line.split("=").last()) }
-                    } else if (line.startsWith("#KODIPROP:inputstream.adaptive.license_type")) {
-                        addedChannels =
-                            addedChannels.map { it.copy(licenseType = line.split("=").last()) }
-                    } else if (line.startsWith("#KODIPROP:inputstream.adaptive.license_key")) {
-                        addedChannels =
-                            addedChannels.map { it.copy(licenseKey = line.split("=").last()) }
-                    } else {
-                        channelList.addAll(addedChannels.map { it.copy(url = line.trim()) })
-                    }
+                    channelList.addAll(addedChannels.map { it.copy(url = line.trim()) })
                 }
             }
 

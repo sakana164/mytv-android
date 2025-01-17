@@ -83,15 +83,6 @@ fun DashboardModuleList(
                 imageVector = Icons.Outlined.ViewCozy,
                 title = "多屏同播",
                 onSelected = toMultiViewScreen,
-                tag = "BETA",
-            )
-        }
-
-        item {
-            DashboardModuleItem(
-                imageVector = Icons.Outlined.InsertChart,
-                title = "观看统计",
-                tag = "UNDO",
             )
         }
 

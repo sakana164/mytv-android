@@ -9,6 +9,7 @@
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$/../YYKM/tbsx5" />
             <option value="$PROJECT_DIR$/../media/libraries/cast" />
             <option value="$PROJECT_DIR$/../media/libraries/common" />
             <option value="$PROJECT_DIR$/../media/libraries/common_ktx" />

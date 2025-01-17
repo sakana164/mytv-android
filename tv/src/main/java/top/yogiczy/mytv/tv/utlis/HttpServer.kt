@@ -486,7 +486,7 @@ object HttpServer : Loggable("HttpServer") {
     }
 
     private fun getLocalIpAddress(): String {
-        val defaultIp = "0.0.0.0"
+        val defaultIp = "127.0.0.1"
 
         try {
             val en = NetworkInterface.getNetworkInterfaces()
@@ -497,9 +497,19 @@ object HttpServer : Loggable("HttpServer") {
                     val inetAddress = enumIpAddr.nextElement()
                     if (!inetAddress.isLoopbackAddress && inetAddress is Inet4Address) {
                         val ip = inetAddress.hostAddress ?: defaultIp
-                        if ((ip.startsWith("192.168.") || ip.startsWith("10."))
-                            && !ip.endsWith(".1") && !ip.endsWith(".0")
-                        )
+                        val isValid = when {
+                            ip.startsWith("192.168.") -> true
+                            ip.startsWith("10.") -> true
+                            ip.startsWith("172.") -> {
+                                val parts = ip.split(".")
+                                val secondOctet = parts.getOrNull(1)?.toIntOrNull()
+                                secondOctet in 16..31
+                            }
+
+                            else -> false
+                        }
+
+                        if (isValid)
                             return ip
                     }
                 }

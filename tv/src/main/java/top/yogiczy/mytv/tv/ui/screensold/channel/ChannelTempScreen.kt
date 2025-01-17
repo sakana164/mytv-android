@@ -55,7 +55,7 @@ fun ChannelTempScreen(
                         end = Offset(0f, Float.POSITIVE_INFINITY),
                     )
                 )
-                .padding(childPadding.paddingValues),
+                .padding(childPadding.copy(top = childPadding.top * 2).paddingValues),
             channelProvider = channelProvider,
             channelLineIdxProvider = channelLineIdxProvider,
             recentEpgProgrammeProvider = recentEpgProgrammeProvider,

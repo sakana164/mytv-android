@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
@@ -18,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,26 +86,33 @@ private fun LoadingState(
     val childPadding = rememberChildPadding()
 
     Box(modifier = modifier.fillMaxSize()) {
-        Column(
+        Row(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(start = childPadding.start, bottom = childPadding.bottom),
+                .fillMaxWidth()
+                .padding(childPadding.paddingValues),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Bottom,
         ) {
-            CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.titleLarge
-            ) { title() }
+            Column {
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.titleLarge
+                ) { title() }
 
-            val message = messageProvider()
-            if (message != null) {
-                Text(
-                    text = message,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = LocalContentColor.current.copy(0.8f),
-                    modifier = Modifier.sizeIn(maxWidth = 8.gridColumns()),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                val message = messageProvider()
+                if (message != null) {
+                    Text(
+                        text = message,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = LocalContentColor.current.copy(0.8f),
+                        modifier = Modifier.sizeIn(maxWidth = 8.gridColumns()),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
             }
+
+            Text("长按OK键或短按菜单键进入设置页面", modifier = Modifier.alpha(0.6f))
         }
     }
 }

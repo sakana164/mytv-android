@@ -36,3 +36,6 @@ if (mediaSettingsFile.exists()) {
     (gradle as ExtensionAware).extra["androidxMediaModulePrefix"] = "media3:"
     apply(from = mediaSettingsFile)
 }
+
+include(":tbsx5")
+project(":tbsx5").projectDir = file("../YYKM/tbsx5")
